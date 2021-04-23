@@ -10,7 +10,8 @@ int main() {
     /*! The pixel scale y coordinate */
     float m_pixelScaleY;
     std::cout << "Hello, World!" << std::endl;
-    m_odReader = new ODReader::openDriveReader();
+//    DisplayWidget *m_pDisplayWidget = new DisplayWidget(nullptr);
+    openDriveReader *m_odReader = new ODReader::openDriveReader();
     if(m_odReader->FileReadErr>0)
     {
       //LOG_WARNING("File Read Error: %d", m_odReader->FileReadErr);
@@ -91,10 +92,10 @@ int main() {
         zScale=255*(mapPoints[j].p.z - m_minZ)/fabs(m_maxZ-m_minZ);
       }
       //Send pixel coordinates to draw
-      if( (j+1)%num !=0 && m_ShowLanes)
-      {
-        m_pDisplayWidget->DrawLine(pixX1, pixY1, pixX2, pixY2,zScale);
-      }
+//      if( (j+1)%num !=0 && m_ShowLanes)
+//      {
+//        m_pDisplayWidget->DrawLine(pixX1, pixY1, pixX2, pixY2,zScale);
+//      }
     }
     for (unsigned int j = 0; j < centerPoints.size() - 1; j++)
     {
@@ -107,10 +108,10 @@ int main() {
       float pixY1 = GRAPHICSSCENE_HEIGHT - (centerPoints[j].p.y - m_minY)*m_pixelScaleY;
       float pixY2 = GRAPHICSSCENE_HEIGHT - (centerPoints[j + 1].p.y - m_minY)*m_pixelScaleY;
       //Send pixel coordinates to draw
-      if( (j+1)%num !=0)
-      {
-        m_pDisplayWidget->DrawLine(pixX1, pixY1, pixX2, pixY2,0,CENTER_LANE);
-      }
+//      if( (j+1)%num !=0)
+//      {
+//        m_pDisplayWidget->DrawLine(pixX1, pixY1, pixX2, pixY2,0,CENTER_LANE);
+//      }
     }
     for (unsigned int j = 0; j < borderPoints.size() - 1; j++)
     {
@@ -128,12 +129,12 @@ int main() {
         zScale=255*(borderPoints[j].p.z - m_minZ)/fabs(m_maxZ-m_minZ);
       }
       //Send pixel coordinates to draw
-      if( (j+1)%num !=0)
-      {
-        //LOG_INFO("Road %d Point %d Mod %d",m_odReader->RoadList[i].id,j,(j+1)%num);
-        //LOG_INFO("x1 %.3f y1 %.3f x2 %.3f y2 %.3f",mapPoints[j].p.x,mapPoints[j].p.y,mapPoints[j+1].p.x,mapPoints[j+1].p.y);
-        m_pDisplayWidget->DrawLine(pixX1, pixY1, pixX2, pixY2,zScale,BORDER_LANE);
-      }
+//      if( (j+1)%num !=0)
+//      {
+//        //LOG_INFO("Road %d Point %d Mod %d",m_odReader->RoadList[i].id,j,(j+1)%num);
+//        //LOG_INFO("x1 %.3f y1 %.3f x2 %.3f y2 %.3f",mapPoints[j].p.x,mapPoints[j].p.y,mapPoints[j+1].p.x,mapPoints[j+1].p.y);
+//        m_pDisplayWidget->DrawLine(pixX1, pixY1, pixX2, pixY2,zScale,BORDER_LANE);
+//      }
     }
     return 0;
 }
